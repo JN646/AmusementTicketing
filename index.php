@@ -10,7 +10,10 @@
     <?php include 'functions.php'; ?>
   </head>
   <body>
+    <br>
 <div class='container'>
+  <br>
+<div class='col-md-12'>
   <?php if (isset($_SESSION['message'])): ?>
       <div class="msg">
         <?php
@@ -154,6 +157,8 @@
     } else {
         SQLError($mysqli);
     } ?>
+  </div>
+  <br>
   </div>
   </body>
 </html>
