@@ -10,8 +10,7 @@
     <?php include 'functions.php'; ?>
   </head>
   <body>
-    <br>
-<div class='container'>
+<div class='fluid-container'>
   <br>
 <div class='col-md-12'>
   <?php if (isset($_SESSION['message'])): ?>
@@ -47,7 +46,7 @@
     }
     ?>
 
-<div class='border'>
+<div class='border border-primary'>
   <div class='col-md-12'>
   <!-- Control Form -->
     <?php if ($update == true): ?>
@@ -60,48 +59,48 @@
 
     <div class='form-row'>
       <!-- first_name -->
-    <div class='col'>
+      <div class='col'>
         <div class="form-group">
-        		<label class="">first_name</label><br>
-        		<input class='form-control' type="text" name="first_name" value="<?php echo $first_name; ?>">
+      		<label class="">first_name</label><br>
+      		<input class='form-control' type="text" name="first_name" value="<?php echo $first_name; ?>">
+      	</div>
+      </div>
+
+      <div class='col'>
+        <!-- last_name -->
+      	<div class="form-group">
+      		<label class="">last_name</label><br>
+      		<input class='form-control' type="text" name="last_name" value="<?php echo $last_name; ?>">
+      	</div>
+      </div>
+    </div>
+
+    <div class='form-row'>
+      <!-- email -->
+        <div class='col'>
+          <div class="form-group">
+        		<label class="">email</label><br>
+            <input class='form-control' type="text" name="email" value="<?php echo $email; ?>">
         	</div>
         </div>
 
         <div class='col'>
-          <!-- last_name -->
-        	<div class="form-group">
-        		<label class="">last_name</label><br>
-        		<input class='form-control' type="text" name="last_name" value="<?php echo $last_name; ?>">
+          <div class="form-group">
+            <label class="">Password</label><br>
+            <input class='form-control' type="password" name="password" value="<?php echo $password; ?>">
+          </div>
+        </div>
+      </div>
+
+      <div class='form-row'>
+        <!-- Crerdits -->
+        <div class='col'>
+          <div class="form-group">
+        		<label class="">Credits</label><br>
+            <input class='form-control' type="text" name="credits" value="<?php echo $credits; ?>">
         	</div>
         </div>
-    </div>
-
-<div class='form-row'>
-  <!-- email -->
-    <div class='col'>
-      <div class="form-group">
-    		<label class="">email</label><br>
-        <input class='form-control' type="text" name="email" value="<?php echo $email; ?>">
-    	</div>
-    </div>
-
-    <div class='col'>
-      <div class="form-group">
-        <label class="">Password</label><br>
-        <input class='form-control' type="password" name="password" value="<?php echo $password; ?>">
       </div>
-    </div>
-  </div>
-
-  <div class='form-row'>
-    <!-- Crerdits -->
-      <div class='col'>
-        <div class="form-group">
-      		<label class="">Credits</label><br>
-          <input class='form-control' type="text" name="credits" value="<?php echo $credits; ?>">
-      	</div>
-      </div>
-  </div>
 
       <!-- Submit Buttons -->
     	<div class="form-group">
@@ -123,28 +122,30 @@
     if ($result = mysqli_query($mysqli, $activesql)) {
         if (mysqli_num_rows($result) > 0) {
             ?>
-    <table class='table'>
+    <table class='table table-hover'>
       <tr>
+        <th class='text-center'>QR</th>
         <th class='text-center'>ID</th>
         <th class='text-center'>First Name</th>
         <th class='text-center'>Last Name</th>
         <th class='text-center'>Email</th>
         <th class='text-center'>Credits</th>
-			  <th class='text-center' colspan="3">Action</th>
+			  <th class='text-center' colspan="4">Action</th>
       </tr>
 
       <?php
           while ($row = mysqli_fetch_array($result)) {
               // Draw Table.
               echo "<tr>";
-              echo "<td>" . $row['id'] . "</td>";
+              echo '<td class="text-center"><img src=qr.php?id="' . $row['id'] . '" /></td>';
+              echo "<td class='text-center'>" . $row['id'] . "</td>";
               echo "<td>" . $row['first_name'] . "</td>";
               echo "<td>" . $row['last_name'] . "</td>";
               echo "<td>" . $row['email'] . "</td>";
-              echo "<td>" . $row['credits'] . "</td>";
-              echo "<td><a href='view.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
-              echo "<td><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
-              echo "<td><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
+              echo "<td class='text-center'>" . $row['credits'] . "</td>";
+              echo "<td class='text-center'><a href='qr.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
+              echo "<td class='text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
+              echo "<td class='text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
               echo "</tr>";
           }
             echo "</table>";

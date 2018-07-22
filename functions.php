@@ -1,5 +1,14 @@
 <?php
-// Count Microphones.
+// Include Libraries
+include('lib/phpqrcode/qrlib.php');
+
+function createQR() {
+  $svgCode = QRcode::svg('PHP QR Code :)');
+
+  echo $svgCode;
+}
+
+// Count Users.
 function countUsers($mysqli)
 {
     // SELECT requests WHERE id = GET
