@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../style.css">
 
     <!-- Includes -->
-    <?php include '../DBConfig.php'; ?>
-    <?php include '../functions.php'; ?>
+    <?php include 'DBConfig.php'; ?>
+    <?php include 'functions.php'; ?>
   </head>
   <body>

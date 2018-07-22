@@ -1,4 +1,4 @@
-<<?php include 'partials/_header.php' ?>
+<?php include 'partials/_header.php' ?>
 <div class='fluid-container'>
   <br>
 <div class='col-md-12'>
@@ -15,7 +15,7 @@
 
     <?php
     // initialise variables
-    $first_name = $last_name = $email = $credits = $password = "";
+    $first_name = $last_name = $email = $credits = $password = $dob = "";
     $update = false;
 
     if (isset($_GET['edit'])) {
@@ -29,6 +29,7 @@
             $first_name = $n['first_name'];
             $last_name = $n['last_name'];
             $email = $n['email'];
+            $dob = $n['dob'];
             $credits= $n['credits'];
             $password = $n['password'];
         }
@@ -118,6 +119,7 @@
         <th class='text-center'>First Name</th>
         <th class='text-center'>Last Name</th>
         <th class='text-center'>Email</th>
+        <th class='text-center'>DOB</th>
         <th class='text-center'>Credits</th>
 			  <th class='text-center' colspan="4">Action</th>
       </tr>
@@ -131,6 +133,7 @@
               echo "<td>" . $row['first_name'] . "</td>";
               echo "<td>" . $row['last_name'] . "</td>";
               echo "<td>" . $row['email'] . "</td>";
+              echo "<td class='text-center'>" . $row['dob'] . "</td>";
               echo "<td class='text-center'>" . $row['credits'] . "</td>";
               echo "<td class='text-center'><a href='qr.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
               echo "<td class='text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
