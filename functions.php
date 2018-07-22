@@ -1,6 +1,6 @@
 <?php
 // Count Microphones.
-function countMicrophones($mysqli)
+function countUsers($mysqli)
 {
     // SELECT requests WHERE id = GET
     $query = "SELECT COUNT(*) FROM crud";
@@ -10,22 +10,4 @@ function countMicrophones($mysqli)
     // Return Value.
     return $rows[0];
 }
-
-function polarPatternImage($polarpattern) {
-  if ($polarpattern == "Omnidirectional") {
-    // Omni...
-    return "omni.png";
-  }
-
-  if ($polarpattern == "Cardioid") {
-    // Cardioid...
-    return "cardioid.png";
-  }
-
-  if ($polarpattern == "Super-Cardioid") {
-    // SuperCardioid...
-    return "super.png";
-  }
-}
-
  ?>

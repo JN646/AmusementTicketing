@@ -6,23 +6,21 @@ include 'DBConfig.php';
 session_start();
 
 // initialise variables
-$make = $model = $type = $polarpattern = $notes = $price = $discontinued = "";
+$first_name = $last_name = $email = $credits = $password = "";
 $update = false;
 $id = 0;
 
 // Add
 if (isset($_POST['save'])) {
   $id = $_POST['id'];
-  $make = $_POST['make'];
-  $model = $_POST['model'];
-  $type = $_POST['type'];
-  $price = $_POST['price'];
-  $discontinued = $_POST['discontinued'];
-  $polarpattern = $_POST['polarpattern'];
-  $notes = $_POST['notes'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $email = $_POST['email'];
+  $credits = $_POST['credits'];
+  $password = $_POST['password'];
 
-  if(mysqli_query($mysqli, "INSERT INTO crud (make, model, type, polarpattern, price, discontinued, notes) VALUES ('$make', '$model', '$type', '$polarpattern', '$price', 'discontinued', '$notes')")) {
-    $_SESSION['message'] = "Microphone Saved";
+  if(mysqli_query($mysqli, "INSERT INTO crud (first_name, last_name, email, credits, password) VALUES ('$first_name', '$last_name', '$email', '$credits', '$password')")) {
+    $_SESSION['message'] = "User Saved";
     header('location: index.php');
   } else {
     $_SESSION['message'] = mysqli_error($mysqli);
@@ -33,20 +31,18 @@ if (isset($_POST['save'])) {
 // Edit
 if (isset($_POST['update'])) {
   $id = $_POST['id'];
-  $make = $_POST['make'];
-  $model = $_POST['model'];
-  $type = $_POST['type'];
-  $price = $_POST['price'];
-  $discontinued = $_POST['discontinued'];
-  $polarpattern = $_POST['polarpattern'];
-  $notes = $_POST['notes'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $email = $_POST['email'];
+  $credits = $_POST['credits'];
+  $password = $_POST['password'];
 
-  if(mysqli_query($mysqli, "UPDATE crud SET make='$make', model='$model', price='$price', discontinued='$discontinued', type='$type', polarpattern='$polarpattern', notes='$notes' WHERE id=$id")) {
-    $_SESSION['message'] = "Microphone Updated";
+  if(mysqli_query($mysqli, "UPDATE crud SET first_name='$first_name', last_name='$last_name', email='$email', credits='$credits', password='$password' WHERE id=$id")) {
+    $_SESSION['message'] = "User Updated";
     header('location: index.php');
   } else {
     $_SESSION['message'] = mysqli_error($mysqli);
-    // header('location: index.php');
+    header('location: index.php');
   }
 }
 
@@ -55,7 +51,7 @@ if (isset($_GET['del'])) {
 	$id = $_GET['del'];
 
   if(mysqli_query($mysqli, "DELETE FROM crud WHERE id=$id")) {
-    $_SESSION['message'] = "Microphone Deleted";
+    $_SESSION['message'] = "User Deleted";
     header('location: index.php');
   } else {
     $_SESSION['message'] = mysqli_error($mysqli);

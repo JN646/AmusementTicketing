@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCtype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Microphone Database</title>
+    <title>Amusement Manangement System</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -19,12 +19,12 @@
         ?>
       </div>
     <?php endif ?>
-    <h1>Microphone Database <span class='badge'>(<?php echo countMicrophones($mysqli); ?>)</span></h1>
-    <p>A database of common microphones, specs and information. A simple programming project.</p>
+    <h1>Amusement Management System <span class='badge'>(<?php echo countUsers($mysqli); ?>)</span></h1>
+    <p>Users and Credits of a venue. Work in progress system.</p>
 
     <?php
     // initialise variables
-    $make = $model = $type = $polarpattern = $price = $notes = $discontinued = "";
+    $first_name = $last_name = $email = $credits = $password = "";
     $update = false;
 
     if (isset($_GET['edit'])) {
@@ -34,13 +34,12 @@
 
         if (count($record) == 1) {
             $n = mysqli_fetch_array($record);
-            $make = $n['make'];
-            $model = $n['model'];
-            $type = $n['type'];
-            $polarpattern = $n['polarpattern'];
-            $price = $n['price'];
-            $discontinued = $n['discontinued'];
-            $notes = $n['notes'];
+            $id = $n['id'];
+            $first_name = $n['first_name'];
+            $last_name = $n['last_name'];
+            $email = $n['email'];
+            $credits= $n['credits'];
+            $password = $n['password'];
         }
     }
     ?>
@@ -57,72 +56,49 @@
     	<input type="hidden" name="id" value="<?php echo $id; ?>">
 
     <div class='form-row'>
-      <!-- Make -->
+      <!-- first_name -->
     <div class='col'>
         <div class="form-group">
-        		<label class="">Make</label><br>
-        		<input class='form-control' type="text" name="make" value="<?php echo $make; ?>">
+        		<label class="">first_name</label><br>
+        		<input class='form-control' type="text" name="first_name" value="<?php echo $first_name; ?>">
         	</div>
         </div>
 
         <div class='col'>
-          <!-- Model -->
+          <!-- last_name -->
         	<div class="form-group">
-        		<label class="">Model</label><br>
-        		<input class='form-control' type="text" name="model" value="<?php echo $model; ?>">
+        		<label class="">last_name</label><br>
+        		<input class='form-control' type="text" name="last_name" value="<?php echo $last_name; ?>">
         	</div>
         </div>
     </div>
 
 <div class='form-row'>
-  <!-- Type -->
+  <!-- email -->
     <div class='col'>
       <div class="form-group">
-    		<label class="">Type</label><br>
-        <select class="form-control" name="type">
-          <option value="">Please Select</option>
-          <option value="Dynamic">Dynamic</option>
-          <option value="Condenser">Condenser</option>
-          <option value="Ribbon">Ribbon</option>
-        </select>
+    		<label class="">email</label><br>
+        <input class='form-control' type="text" name="email" value="<?php echo $email; ?>">
     	</div>
     </div>
 
     <div class='col'>
-      <!-- Polar Patterns -->
       <div class="form-group">
-        <label class="">Polar Pattern</label><br>
-        <select class="form-control" name="polarpattern">
-          <option value="">Please Select</option>
-          <option value="Omnidirectional">Omnidirectional</option>
-          <option value="Cardioid">Cardioid</option>
-          <option value="Super-Cardioid">Super-Cardioid</option>
-        </select>
+        <label class="">Password</label><br>
+        <input class='form-control' type="password" name="password" value="<?php echo $password; ?>">
       </div>
     </div>
+  </div>
 
-    <!-- Price -->
+  <div class='form-row'>
+    <!-- Crerdits -->
       <div class='col'>
         <div class="form-group">
-      		<label class="">Price</label><br>
-          <input class='form-control' type="text" name="price" value="<?php echo $price; ?>">
+      		<label class="">Credits</label><br>
+          <input class='form-control' type="text" name="credits" value="<?php echo $credits; ?>">
       	</div>
       </div>
-
-      <div class='col'>
-        <!-- Discontinued -->
-        <div class="form-group">
-          <label class="">Discontinued</label><br>
-          <input class='form-control' type="text" name="discontinued" value="<?php echo $discontinued; ?>">
-        </div>
-      </div>
-    </div>
-
-      <!-- Notes -->
-    	<div class="form-group">
-    		<label class="">Notes</label><br>
-    		<textarea class="form-control" name="notes"><?php echo $notes; ?></textarea>
-    	</div>
+  </div>
 
       <!-- Submit Buttons -->
     	<div class="form-group">
@@ -140,16 +116,17 @@
 
     <?php
     // ACTIVE RESULTS
-    $activesql = "SELECT * FROM crud ORDER BY make, model ASC";
+    $activesql = "SELECT * FROM crud ORDER BY id";
     if ($result = mysqli_query($mysqli, $activesql)) {
         if (mysqli_num_rows($result) > 0) {
             ?>
     <table class='table'>
       <tr>
-        <th class='text-center'>Make</th>
-        <th class='text-center'>Model</th>
-        <th class='text-center'>Type</th>
-        <th class='text-center'>Polar Pattern</th>
+        <th class='text-center'>ID</th>
+        <th class='text-center'>First Name</th>
+        <th class='text-center'>Last Name</th>
+        <th class='text-center'>Email</th>
+        <th class='text-center'>Credits</th>
 			  <th class='text-center' colspan="3">Action</th>
       </tr>
 
@@ -157,10 +134,11 @@
           while ($row = mysqli_fetch_array($result)) {
               // Draw Table.
               echo "<tr>";
-              echo "<td>" . $row['make'] . "</td>";
-              echo "<td>" . $row['model'] . "</td>";
-              echo "<td>" . $row['type'] . "</td>";
-              echo "<td>" . $row['polarpattern'] . "</td>";
+              echo "<td>" . $row['id'] . "</td>";
+              echo "<td>" . $row['first_name'] . "</td>";
+              echo "<td>" . $row['last_name'] . "</td>";
+              echo "<td>" . $row['email'] . "</td>";
+              echo "<td>" . $row['credits'] . "</td>";
               echo "<td><a href='view.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
               echo "<td><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
               echo "<td><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
@@ -171,7 +149,7 @@
             // Free result set
             mysqli_free_result($result);
         } else {
-            echo "No microphones were found.";
+            echo "No users were found.";
         }
     } else {
         SQLError($mysqli);

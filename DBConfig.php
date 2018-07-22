@@ -1,6 +1,6 @@
  <?php
 //MySQL connection
-$mysqli = new mysqli('localhost', 'root', '', 'microphone');
+$mysqli = new mysqli('localhost', 'root', '', 'amuse');
 
  //If connection fail
 if ($mysqli->connect_error) {
