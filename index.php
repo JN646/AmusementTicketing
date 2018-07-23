@@ -36,7 +36,7 @@
     }
     ?>
 
-<div class='border border-primary'>
+<div class='border border-primary col-md-6'>
   <div class='col-md-12'>
   <!-- Control Form -->
     <?php if ($update == true): ?>
@@ -51,16 +51,18 @@
       <!-- first_name -->
       <div class='col'>
         <div class="form-group">
-      		<label class="">first_name</label><br>
+      		<label class="">First Name</label><br>
       		<input class='form-control' type="text" name="first_name" value="<?php echo $first_name; ?>">
+          <small class="form-text text-muted">User first name.</small>
       	</div>
       </div>
 
       <div class='col'>
         <!-- last_name -->
       	<div class="form-group">
-      		<label class="">last_name</label><br>
+      		<label class="">Last Name</label><br>
       		<input class='form-control' type="text" name="last_name" value="<?php echo $last_name; ?>">
+          <small class="form-text text-muted">User last name.</small>
       	</div>
       </div>
     </div>
@@ -69,8 +71,9 @@
       <!-- email -->
         <div class='col'>
           <div class="form-group">
-        		<label class="">email</label><br>
+        		<label class="">Email</label><br>
             <input class='form-control' type="text" name="email" value="<?php echo $email; ?>">
+            <small class="form-text text-muted">User email address.</small>
         	</div>
         </div>
 
@@ -78,6 +81,7 @@
           <div class="form-group">
             <label class="">Password</label><br>
             <input class='form-control' type="password" name="password" value="<?php echo $password; ?>">
+            <small class="form-text text-muted">User password.</small>
           </div>
         </div>
       </div>
@@ -88,6 +92,7 @@
           <div class="form-group">
         		<label class="">Credits</label><br>
             <input class='form-control' type="text" name="credits" value="<?php echo $credits; ?>">
+            <small class="form-text text-muted">Number of credits.</small>
         	</div>
         </div>
       </div>

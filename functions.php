@@ -2,21 +2,15 @@
 // Include Libraries
 include('lib/phpqrcode/qrlib.php');
 
-function createQR() {
-  $svgCode = QRcode::svg('PHP QR Code :)');
-
-  echo $svgCode;
-}
-
 // Count Users.
 function countUsers($mysqli)
 {
-    // SELECT requests WHERE id = GET
-    $query = "SELECT COUNT(*) FROM crud";
-    $result = mysqli_query($mysqli, $query);
-    $rows = mysqli_fetch_row($result);
+  // SELECT requests WHERE id = GET
+  $query = "SELECT COUNT(*) FROM crud";
+  $result = mysqli_query($mysqli, $query);
+  $rows = mysqli_fetch_row($result);
 
-    // Return Value.
-    return $rows[0];
+  // Return Value.
+  return $rows[0];
 }
  ?>
