@@ -10,7 +10,7 @@
         ?>
       </div>
     <?php endif ?>
-    <h1>Amusement Management System <span class='badge'>(<?php echo countUsers($mysqli); ?>)</span></h1>
+    <h1>Credit Management System <span class='badge'>(<?php echo countUsers($mysqli); ?>)</span></h1>
     <p>Users and Credits of a venue. Work in progress system.</p>
 
     <?php
