@@ -139,11 +139,13 @@
         <th class='text-center'>Email</th>
         <th class='text-center'>DOB</th>
         <th class='text-center'>Credits</th>
+        <th class='text-center'># Barcodes</th>
 			  <th class='text-center' colspan="4">Action</th>
       </tr>
 
       <?php
           while ($row = mysqli_fetch_array($result)) {
+            $id = $row['id'];
               // Draw Table.
               echo "<tr>";
               echo '<td class="text-center"><img src=qr.php?id="' . $row['hash'] . '" /></td>';
@@ -154,6 +156,7 @@
               echo "<td>" . $row['email'] . "</td>";
               echo "<td class='text-center'>" . $row['dob'] . "</td>";
               echo "<td class='text-center'>" . $row['credits'] . "</td>";
+              echo "<td class='text-center'>" . countCodes($mysqli, $id) . "</td>";
               echo "<td class='text-center'><a href='qr.php?id=" . $row['hash'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
               echo "<td class='text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
               echo "<td class='text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";

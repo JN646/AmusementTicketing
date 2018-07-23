@@ -24,4 +24,11 @@ function generateRandomString($length = 15) {
     }
     return $randomString;
 }
- ?>
+
+function countCodes($mysqli, $id) {
+  $query = "SELECT COUNT(*) FROM codes WHERE user_id = $id";
+  $result = mysqli_query($mysqli, $query);
+  $rows = mysqli_fetch_row($result);
+
+  return $rows[0];
+}
