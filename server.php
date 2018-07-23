@@ -1,6 +1,7 @@
 <?php
 // Link to DB
 include 'DBConfig.php';
+include 'functions.php';
 
 // Start Session
 session_start();
@@ -20,14 +21,15 @@ if (isset($_POST['save'])) {
   $password = $_POST['password'];
   $IDHash = "";
 
-  $IDHash = password_hash("MyBigAmusement".$id."420", PASSWORD_DEFAULT);
+  $IDHash = generateRandomString();
 
   if(mysqli_query($mysqli, "INSERT INTO crud (hash, first_name, last_name, email, credits, password) VALUES ('$IDHash', '$first_name', '$last_name', '$email', '$credits', '$password')")) {
     $_SESSION['message'] = "User Saved";
     header('location: index.php');
   } else {
-    $_SESSION['message'] = mysqli_error($mysqli);
-    header('location: index.php');
+    echo mysqli_error($mysqli);
+    // $_SESSION['message'] = mysqli_error($mysqli);
+    // header('location: index.php');
   }
 }
 
