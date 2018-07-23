@@ -1,7 +1,16 @@
 <?php include 'partials/_header.php' ?>
 <div class='fluid-container'>
-  <br>
-<div class='col-md-12'>
+<br>
+<div class='row'>
+  <div class="col-md-1">
+<h3>Navigation</h3>
+<ul>
+  <li>Link 1</li>
+  <li>Link 2</li>
+  <li>Link 3</li>
+</ul>
+</div>
+<div class='col-md-11'>
   <?php if (isset($_SESSION['message'])): ?>
       <div class="msg">
         <?php
@@ -25,6 +34,7 @@
 
         if (count($record) == 1) {
             $n = mysqli_fetch_array($record);
+            $IDHash = $n['hash'];
             $id = $n['id'];
             $first_name = $n['first_name'];
             $last_name = $n['last_name'];
@@ -87,7 +97,7 @@
       </div>
 
       <div class='form-row'>
-        <!-- Crerdits -->
+        <!-- Credits -->
         <div class='col'>
           <div class="form-group">
         		<label class="">Credits</label><br>
@@ -121,6 +131,7 @@
       <tr>
         <th class='text-center'>QR</th>
         <th class='text-center'>ID</th>
+        <th class='text-center'>Hash</th>
         <th class='text-center'>First Name</th>
         <th class='text-center'>Last Name</th>
         <th class='text-center'>Email</th>
@@ -135,6 +146,7 @@
               echo "<tr>";
               echo '<td class="text-center"><img src=qr.php?id="' . $row['id'] . '" /></td>';
               echo "<td class='text-center'>" . $row['id'] . "</td>";
+              echo "<td class='text-center'>" . $row['hash'] . "</td>";
               echo "<td>" . $row['first_name'] . "</td>";
               echo "<td>" . $row['last_name'] . "</td>";
               echo "<td>" . $row['email'] . "</td>";
@@ -156,6 +168,7 @@
         SQLError($mysqli);
     } ?>
   </div>
+</div>
   <br>
   </div>
   </body>

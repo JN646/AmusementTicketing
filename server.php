@@ -18,8 +18,11 @@ if (isset($_POST['save'])) {
   $email = $_POST['email'];
   $credits = $_POST['credits'];
   $password = $_POST['password'];
+  $IDHash = "";
 
-  if(mysqli_query($mysqli, "INSERT INTO crud (first_name, last_name, email, credits, password) VALUES ('$first_name', '$last_name', '$email', '$credits', '$password')")) {
+  $IDHash = password_hash("MyBigAmusement".$id."420", PASSWORD_DEFAULT);
+
+  if(mysqli_query($mysqli, "INSERT INTO crud (hash, first_name, last_name, email, credits, password) VALUES ('$IDHash', '$first_name', '$last_name', '$email', '$credits', '$password')")) {
     $_SESSION['message'] = "User Saved";
     header('location: index.php');
   } else {
