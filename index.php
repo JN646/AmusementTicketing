@@ -146,7 +146,7 @@
           while ($row = mysqli_fetch_array($result)) {
               // Draw Table.
               echo "<tr>";
-              echo '<td class="text-center"><img src=qr.php?id="' . $row['id'] . '" /></td>';
+              echo '<td class="text-center"><img src=qr.php?id="' . $row['hash'] . '" /></td>';
               echo "<td class='text-center'>" . $row['id'] . "</td>";
               echo "<td class='text-center'>" . $row['hash'] . "</td>";
               echo "<td>" . $row['first_name'] . "</td>";

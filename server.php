@@ -43,6 +43,7 @@ if (isset($_POST['update'])) {
   $password = $_POST['password'];
   $IDHash = $_POST['hash'];
 
+  // Generate a hash if one doesnt already exist.
   if ($IDHash !== NULL) {
     $IDHash = generateRandomString();
     mysqli_query($mysqli, "UPDATE crud SET hash='$IDHash' WHERE id=$id");
