@@ -28,8 +28,8 @@ if (isset($_POST['save'])) {
     header('location: index.php');
   } else {
     echo mysqli_error($mysqli);
-    // $_SESSION['message'] = mysqli_error($mysqli);
-    // header('location: index.php');
+    $_SESSION['message'] = mysqli_error($mysqli);
+    header('location: index.php');
   }
 }
 
@@ -41,6 +41,12 @@ if (isset($_POST['update'])) {
   $email = $_POST['email'];
   $credits = $_POST['credits'];
   $password = $_POST['password'];
+  $IDHash = $_POST['hash'];
+
+  if ($IDHash !== NULL) {
+    $IDHash = generateRandomString();
+    mysqli_query($mysqli, "UPDATE crud SET hash='$IDHash' WHERE id=$id");
+  }
 
   if(mysqli_query($mysqli, "UPDATE crud SET first_name='$first_name', last_name='$last_name', email='$email', credits='$credits', password='$password' WHERE id=$id")) {
     $_SESSION['message'] = "User Updated";
