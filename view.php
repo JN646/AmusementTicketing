@@ -1,41 +1,69 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Microphone Database</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <?php include 'DBConfig.php'; ?>
-    <?php include 'functions.php'; ?>
-  </head>
-  <body>
-<div class='container'>
-  <?php
+<?php include 'partials/_header.php' ?>
+<div class='fluid-container'>
+<br>
+<div class='row'>
+  <div class="col-md-1">
+    <div class='col-md-12'>
+      <h3>Nav</h3>
+      <ul>
+        <li>Link 1</li>
+        <li>Link 2</li>
+        <li>Link 3</li>
+      </ul>
+    </div>
+  </div>
+<div class='col-md-11'>
+  <?php if (isset($_SESSION['message'])): ?>
+      <div class="msg">
+        <?php
+          echo $_SESSION['message'];
+          unset($_SESSION['message']);
+        ?>
+      </div>
+    <?php endif ?>
+    <h1>View Page</h1>
+    <p>Shows all barcodes linked to a user.</p>
+
+    <br>
+
+    <?php
     $id = $_GET["id"];
 
-    $activesql = "SELECT * FROM crud WHERE id = $id";
-    $result = mysqli_query($mysqli, $activesql);
-    $microphone = mysqli_fetch_array($result);
+    // ACTIVE RESULTS
+    $activesql = "SELECT * FROM codes WHERE user_id = $id";
+    if ($result = mysqli_query($mysqli, $activesql)) {
+        if (mysqli_num_rows($result) > 0) {
+            ?>
+    <table class='table table-hover'>
+      <tr>
+        <th class='text-center'>ID</th>
+        <th class='text-center'>Credits</th>
+      </tr>
 
-    $make = $microphone['make'];
-    $model = $microphone['model'];
-    $type = $microphone['type'];
-    $price = $microphone['price'];
-    $discontinued = $microphone['discontinued'];
-    $polarpattern = $microphone['polarpattern'];
-    $notes = $microphone['notes'];
-   ?>
+      <?php
+          while ($row = mysqli_fetch_array($result)) {
+              // Draw Table.
+              echo "<tr>";
+              echo '<td class="text-center">' . $row['id'] . '</td>';
+              echo '<td class="text-center">' . $row['credits'] . '</td>';
+              echo "</tr>";
+          }
+            echo "</table>";
 
-    <h1><?php echo $make . " " . $model ?></h1>
-    <p><strong>Type:</strong> <?php echo $type ?></p>
-    <p><strong>Price:</strong> <?php echo $price ?></p>
-    <p><strong>Discontinued:</strong> <?php echo $discontinued ?></p>
-    <p><strong>Polar Pattern:</strong> <?php echo $polarpattern ?></p>
-    <img src="img/<?php echo polarPatternImage($polarpattern); ?>" width=100px alt="">
-    <h3>Notes:</h3>
-    <p><?php echo $notes ?></p>
-    <br>
-    <p><a href="index.php">Back</a></p></div>
+            // Free result set
+            mysqli_free_result($result);
+        } else {
+            echo "<p class='text-center'><strong>No codes were found.</strong></p>";
+        }
+    } else {
+        SQLError($mysqli);
+    } ?>
+  </div>
+</div>
+  <br>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
   </body>
 </html>
