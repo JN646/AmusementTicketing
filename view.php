@@ -1,6 +1,23 @@
 <?php include 'partials/_header.php' ?>
 <div class='fluid-container'>
 <br>
+<?php
+$id = $_GET["id"];
+
+// ACTIVE RESULTS
+$activesql = "SELECT * FROM codes WHERE user_id = $id";
+
+// Person SQL
+$personsql = "SELECT * FROM crud WHERE id = $id";
+$personresult = mysqli_query($mysqli, $personsql);
+$person = mysqli_fetch_array($personresult);
+
+// Assign Person Values
+$personFName = $person['first_name'];
+$personLName = $person['last_name'];
+
+$personName = $personFName . " " . $personLName;
+ ?>
 <div class='row'>
   <div class="col-md-1">
     <div class='col-md-12'>
@@ -21,16 +38,12 @@
         ?>
       </div>
     <?php endif ?>
-    <h1>View Page</h1>
+    <h1><?php echo $personName ?></h1>
     <p>Shows all barcodes linked to a user.</p>
 
     <br>
 
     <?php
-    $id = $_GET["id"];
-
-    // ACTIVE RESULTS
-    $activesql = "SELECT * FROM codes WHERE user_id = $id";
     if ($result = mysqli_query($mysqli, $activesql)) {
         if (mysqli_num_rows($result) > 0) {
             ?>
@@ -38,14 +51,20 @@
       <tr>
         <th class='text-center'>ID</th>
         <th class='text-center'>Credits</th>
+        <th class='text-center'>Expiry</th>
+        <th class='text-center'>Status</th>
       </tr>
 
       <?php
           while ($row = mysqli_fetch_array($result)) {
+              $codeExpiry = $row['expiry'];
+
               // Draw Table.
               echo "<tr>";
               echo '<td class="text-center">' . $row['id'] . '</td>';
               echo '<td class="text-center">' . $row['credits'] . '</td>';
+              echo '<td class="text-center">' . $row['expiry'] . '</td>';
+              echo '<td class="text-center">' . codeActive($mysqli, $codeExpiry) . '</td>';
               echo "</tr>";
           }
             echo "</table>";

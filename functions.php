@@ -33,3 +33,16 @@ function countCodes($mysqli, $id) {
 
   return $rows[0];
 }
+
+// Check to see if expired.
+function codeActive($mysqli, $codeExpiry) {
+  // Get Current Date Time
+  $today = date("Y-m-d H:i:s");
+
+  // Check to see if date has passed.
+  if ($codeExpiry < $today) {
+    return "<span style='color:red;'>Expired</span>";
+  } else {
+    return "<span>Active</span>";
+  }
+}
