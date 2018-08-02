@@ -143,13 +143,13 @@
             $id = $row['id'];
               // Draw Table.
               echo "<tr>";
-              echo '<td class="text-center"><img src=qr.php?id="' . $row['hash'] . '" /></td>';
-              echo "<td class='text-center' style='font-family: monospace;'>" . $row['hash'] . "</td>";
-              echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
-              echo "<td class='text-center'>" . countCodes($mysqli, $id) . "</td>";
-              echo "<td class='text-center'><a href='view.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
-              echo "<td class='text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
-              echo "<td class='text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
+              echo '<td class="align-middle text-center"><img src=qr.php?id="' . $row['hash'] . '" /></td>';
+              echo "<td class='align-middle text-center' style='font-family: monospace;'>" . $row['hash'] . "</td>";
+              echo "<td class='align-middle'>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
+              echo "<td class='align-middle text-center'>" . countCodes($mysqli, $id) . "</td>";
+              echo "<td class='align-middle text-center'><a href='view.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
+              echo "<td class='align-middle text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
+              echo "<td class='align-middle text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
               echo "</tr>";
           }
             echo "</table>";
