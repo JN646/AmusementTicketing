@@ -1,0 +1,9 @@
+{
+    "type": "ftp",
+    "host": "files.000webhost.com",
+    "username": "jgi-testing",
+    "password": "Robo-Com0",
+    "port": 21,
+    "remotePath": "",
+    "uploadOnSave": true
+}
