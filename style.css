@@ -2,3 +2,8 @@
 .hashText {
   font-family: monospace;
 }
+
+/* Page Elements */
+.sidebar {
+  min-width: 100px;
+}

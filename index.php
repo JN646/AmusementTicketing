@@ -2,16 +2,7 @@
 <div class='fluid-container'>
 <br>
 <div class='row'>
-  <div class="col-md-1">
-    <div class='col-md-12'>
-      <h3>Nav</h3>
-      <ul>
-        <li>Link 1</li>
-        <li>Link 2</li>
-        <li>Link 3</li>
-      </ul>
-    </div>
-  </div>
+  <?php include 'partials/_sidebar.php' ?>
 <div class='col-md-11'>
   <?php if (isset($_SESSION['message'])): ?>
       <div class="msg">
@@ -148,8 +139,8 @@
               echo "<td class='align-middle'>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
               echo "<td class='align-middle text-center'>" . countCodes($mysqli, $id) . "</td>";
               echo "<td class='align-middle text-center'><a href='view.php?id=" . $row['id'] . "' class='view_btn'><i class='fas fa-eye'></i></a></td>";
-              echo "<td class='align-middle text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit'></i></a></td>";
-              echo "<td class='align-middle text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt'></i></a></td>";
+              echo "<td class='align-middle text-center'><a href='index.php?edit=" . $row['id'] . "' class='edit_btn'><i class='fas fa-edit edit' style='color: orange;'></i></a></td>";
+              echo "<td class='align-middle text-center'><a href='server.php?del=" . $row['id'] . "' class='del_btn'><i class='far fa-trash-alt' style='color: red;'></i></a></td>";
               echo "</tr>";
           }
             echo "</table>";
@@ -164,10 +155,4 @@
     } ?>
   </div>
 </div>
-  <br>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-  </body>
-</html>
+<?php include 'partials/_footer.php' ?>
